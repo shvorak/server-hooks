@@ -13,6 +13,10 @@
   "files": [
     "./dist"
   ],
+  "scripts": {
+    "test": "bun test",
+    "build": "bun run bundle.ts"
+  },
   "devDependencies": {
     "@types/bun": "^1.0.8",
     "@types/node": "^20.11.28",

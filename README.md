@@ -6,13 +6,13 @@ The main point of this library is to provide small abstraction on top of node's 
 to define scopes inside your async code. Unlike most of DI solutions it doesn't require you to use decorators or DI instance directly.
 
 
-### Installation
+## Installation
 
 ```bash
 npm install -S server-hooks
 ```
 
-### Usage example
+## Usage example
 
 Imagine that you have a logger and you would like to write messages with `requestId` value 
 which you are could receive only in your http request handler.
@@ -53,13 +53,25 @@ Now let's imagine that we have some framework to deal with http requests and all
 you need is to call two functions.
 
 ```typescript
-import {dispatch} from "./index";
+import {dispatch} from "server-hooks";
+import {withLogger} from '../services/logger'
 
 function handler(request: Request) {
     return dispatch(async () => {
-        withLogger(logger.child({requestId: request.headers['x-request-id']}));
+        withLogger({requestId: request.headers['x-request-id']});
         return await router.execute(request);
     });
 }
 
+```
+
+## Development
+
+This project uses `bun` by default. 
+
+```shell
+# Run tests
+bun test
+# Generate dist output
+bun run build
 ```
