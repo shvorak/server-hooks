@@ -102,7 +102,7 @@ export function withContext<T>(context: Context<T>, value: T): void {
  *
  * @param context
  */
-export function useContext<T>(context: Context<T>) {
+export function useContext<T>(context: Context<T>): T {
     const store = scope.getStore()
 
     if (store === undefined) {
@@ -116,7 +116,7 @@ export function useContext<T>(context: Context<T>) {
             `  - Wrap function which uses useContext with dispatch\n`
         )
     }
-    return store.get(context);
+    return store.get(context) as T;
 }
 
 function getStore() {
