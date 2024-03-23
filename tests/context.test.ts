@@ -50,7 +50,7 @@ describe('context', () => {
             const secondValue = dispatch(() => {
                 return useContext(second)!
             })
-            const simpleValue = useContext(simple)!
+            const simpleValue = useContext(simple)
             return simpleValue * secondValue;
         })
 
