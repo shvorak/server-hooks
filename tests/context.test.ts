@@ -1,5 +1,6 @@
 import {describe, expect, it} from "bun:test";
-import {createContext, dispatch, useContext, withContext} from "../source";
+import {dispatch} from "../source";
+import {createContext, useContext, withContext} from "../source";
 
 
 describe('context', () => {
@@ -41,7 +42,7 @@ describe('context', () => {
         })
     })
 
-    it('should return value from dispatch functions', () => {
+    it('should return value from store functions', () => {
         const simple = createContext<number>('simple', 2)
         const second = createContext<number>('second')
 
@@ -61,5 +62,18 @@ describe('context', () => {
         const simple = createContext<number>('simple', 2)
 
         expect(useContext(simple)).toBe(2)
+    });
+
+    it('should call factory function of withContext', () => {
+        const simple = createContext('simple', 1)
+
+        dispatch(() => {
+            withContext(simple, current => current + 1)
+            withContext(simple, current => current + 1)
+            dispatch(() => {
+                expect(useContext(simple)).toBe(3)
+            })
+        })
+        expect(useContext(simple)).toBe(1)
     });
 })

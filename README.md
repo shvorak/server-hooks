@@ -38,7 +38,7 @@ const LoggerCtx = createContext("logger", logger);
 
 // Define specified function to define context value
 export function withLogger(data: object) {
-    withContext(LoggerCtx, useContext(LoggerCtx).child(data))
+    withContext(LoggerCtx, (current) => current.child(data))
 }
 
 // And just create shorhand hook 
